@@ -1,0 +1,22 @@
+{
+  "name": "backen_zatech",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-strip-types --no-warnings  src/server.ts",
+    "dev": "node --env-file .env --experimental-strip-types --no-warnings --watch src/server.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.7.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.1.0",
+    "fastify": "^5.6.1",
+    "zod": "^4.1.12"
+  }
+}

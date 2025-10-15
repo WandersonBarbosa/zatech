@@ -1,0 +1,15 @@
+###
+
+POST http://localhost:3333/api/v1/webhook/atlaz
+Content-Type: application/json
+Authorization: Bearer bF6kkRG6dT2LR3SoYFG65669e3ab8acc
+
+{
+  "token": "bF6kkRG6dT2LR3SoYFG65669e3ab8acc",
+  "telefone": "5511999999999",
+  "mensagem": "Teste de envio de mensagem via webhook",
+  "pix_brcode": "00020126360014BR.GOV.BCB.PIX0114+5511999999999521Pagamento de Teste52040000530398654041.005802BR5925Nome do Recebedor6009Sao Paulo61080540900062070503***63041D3D",
+  "linha_digitavel": "00190500954014481606906809350314337370000000100",
+  "arquivo_tipo": "pdf",
+  "arquivo_url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+}
