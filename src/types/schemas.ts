@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 export const AtlazWebhookSchema = z.object({
+    token: z.string().min(1, "Token é obrigatório"),
     telefone: z.string().min(10, "Telefone inválido"),
     mensagem: z.string().optional(),
     arquivo_url: z.string().optional().nullable(),
