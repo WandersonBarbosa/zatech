@@ -23,7 +23,7 @@ export async function startBaileys() {
 
             // Se a sessão não foi desconectada manualmente, tenta reconectar
             if (shouldReconnect) {
-                await startBaileys();
+                await startBaileys()
             } else {
                 console.log('✅ Sessão encerrada. Exclua a pasta "auth" para iniciar uma nova sessão.');
             }
@@ -37,7 +37,7 @@ export async function startBaileys() {
         if(qr){
             qrCodeData = qr
             console.log("QR Code recebido, por favor escaneie:")
-            console.log(await QRCode.toString(qr, {type:'terminal'}))
+            console.log(await QRCode.toString(qr, {type:'terminal', small: true}) )
         }
 
     })

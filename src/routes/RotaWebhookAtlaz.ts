@@ -9,17 +9,17 @@ export async function rotaWebhookAtlaz(fastify: FastifyInstance) {
     fastify.post('/webhook/atlaz', async (request, reply) => {
         
         const body = AtlazWebhookSchema.parse(request.body)
-        const sock:any = getBaileysSocket()
+        const sock:any = await getBaileysSocket()
         
         const {
             token,
             telefone,
             mensagem,
             arquivo_url,
-            arquivo_tipo,
-            linha_digitavel,
             pix_brcode,
         } = body
+            console.log("token recebido:", token)
+            console.log("token env:", process.env.TOKEN_ATLAZ)
 
         if (token !== process.env.TOKEN_ATLAZ) {
             console.log("Token inválido")
@@ -27,7 +27,7 @@ export async function rotaWebhookAtlaz(fastify: FastifyInstance) {
         }
         const formatted = formatPhoneNumber(telefone)
 
-        await enviarFaturasZap(telefone, mensagem, arquivo_url,linha_digitavel, pix_brcode, sock)
+        await enviarFaturasZap(telefone, mensagem, arquivo_url, pix_brcode, sock)
 
         return reply.code(200).send(
             {  success: false,
