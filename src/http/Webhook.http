@@ -6,7 +6,7 @@ Authorization: Bearer bF6kkRG6dT2LR3SoYFG65669e3ab8acc
 
 {
   "token": "bF6kkRG6dT2LR3SoYFG65669e3ab8acc",
-  "telefone": "5511999999999",
+  "telefone": "99981549233",
   "mensagem": "Teste de envio de mensagem via webhook",
   "pix_brcode": "00020126360014BR.GOV.BCB.PIX0114+5511999999999521Pagamento de Teste52040000530398654041.005802BR5925Nome do Recebedor6009Sao Paulo61080540900062070503***63041D3D",
   "linha_digitavel": "00190500954014481606906809350314337370000000100",

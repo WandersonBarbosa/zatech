@@ -41,6 +41,31 @@ export async function startBaileys() {
         }
 
     })
+
+
+    sock.ev.on('messages.upsert', async (messages: []) => {
+   
+   
+
+   const msg:any = messages.messages[0]
+
+    if (!msg.message) return
+
+    if (msg.message.buttonsResponseMessage) {
+      const id = msg.message.buttonsResponseMessage.selectedButtonId
+      console.log('Botão clicado:', id)
+
+      if (id.startsWith('copiar_pix_')) {
+        const pix_brcode = id.replace('copiar_pix_', '')
+        await sock.sendMessage(msg.key.remoteJid!, { text: `💡 Copie e cole a chave Pix:\n${pix_brcode}` })
+      }
+
+      if (id.startsWith('copiar_boleto_')) {
+        const linha_digitavel = id.replace('copiar_boleto_', '')
+        await sock.sendMessage(msg.key.remoteJid!, { text: `💳 Copie o código do boleto:\n${linha_digitavel}` })
+      }
+    }
+  })
 }
 
 
@@ -62,3 +87,5 @@ export function getBaileysSocket() {
     }
     return sock
 }
+
+

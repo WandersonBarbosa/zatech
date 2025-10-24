@@ -16,21 +16,21 @@ export async function rotaWebhookAtlaz(fastify: FastifyInstance) {
             telefone,
             mensagem,
             arquivo_url,
-            pix_brcode,
+            linha_digitavel,
+            pix_brcode      
         } = body
-            console.log("token recebido:", token)
-            console.log("token env:", process.env.TOKEN_ATLAZ)
 
+        
         if (token !== process.env.TOKEN_ATLAZ) {
             console.log("Token inválido")
             return reply.code(403).send({ error: "Token inválido" });
         }
-        const formatted = formatPhoneNumber(telefone)
+        //const formatted = formatPhoneNumber(telefone)
 
-        await enviarFaturasZap(telefone, mensagem, arquivo_url, pix_brcode, sock)
+        await enviarFaturasZap(telefone, mensagem, arquivo_url, pix_brcode, linha_digitavel,sock)
 
         return reply.code(200).send(
-            {  success: false,
+            {  success: true,
                message: 'enviada com sucesso', 
             })
     })

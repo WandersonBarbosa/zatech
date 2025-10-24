@@ -1,15 +1,16 @@
 import axios from "axios"
+import { text } from "stream/consumers";
 
 
-export async function enviarFaturasZap( PHONE_NUMBER: any,mensagem: any, arquivo_url: any, pix_brcode:any , sock:any){
+export async function enviarFaturasZap( PHONE_NUMBER: any,mensagem: any, arquivo_url: any, pix_brcode:any ,linha_digitavel: any, sock:any){
     const buttons = [
         {
-            buttonId: 'copiar_pix',
+            buttonId: `copiar_pix_${pix_brcode}`,
             buttonText: { displayText: '📋 PIX: 123e4567-pix-chave-exemplo' },
             type: 1
         },
        {
-            buttonId: 'abrir_boleto',
+            buttonId: `abrir_boleto_${linha_digitavel}`,
             buttonText: { displayText: '💳 Boleto: 34191.79001 01043.510047 91020.150008 9 90580000010000' },
             type: 1
        }
@@ -28,14 +29,11 @@ export async function enviarFaturasZap( PHONE_NUMBER: any,mensagem: any, arquivo
         
         await sock.sendMessage(phone, {
         text: mensagem,
+        footer: 'Sistema automático de cobranças',
         buttons: buttons,
         headerType: 1,})
-/*
-            console .log('Mensagem enviada para', phone)
-            console.log('PIX BR Code:', pix_brcode)
-            console.log('URL do arquivo:', arquivo_url)
-            console.log("mensagem:", mensagem)
-            console.log("sock:", sock)*/
+
+
        // Enviar o boleto PDF
             await sock.sendMessage(phone, {
               document: pdfRes.data,
@@ -43,12 +41,14 @@ export async function enviarFaturasZap( PHONE_NUMBER: any,mensagem: any, arquivo
               fileName: `boleto-.pdf`
             })
 
-            if(pix_brcode)  {
-                await sock.sendMessage(phone, {
-                    image: { url: pix_brcode },
-                    caption: 'Aqui está o QR Code do PIX para pagamento.',
-                })
-            }   
+            if(pix_brcode === ''){ pix_brcode = " 37792628000187 \n por favor, envie o comprovante do pagamento via Pix aqui neste chat. 📲" }
+
+            const menspix = `🧾Linha digitavel boleto: ${linha_digitavel} \n 🔑💰 Chave pix : ${pix_brcode} \n\n 🤖 **Mensagem Automática** 🤖 \n Esta mensagem foi gerada automaticamente. Por favor, não responda.`
+           
+            await sock.sendMessage(phone,{
+                text:  menspix,
+                
+            })
         
     }catch (error) {
         console.error('Erro ao enviar mensagem:', error);
